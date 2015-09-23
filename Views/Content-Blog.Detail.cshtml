@@ -1,0 +1,35 @@
+﻿@using Orchard.Blogs
+@using Orchard.Blogs.Extensions
+@using Orchard.Blogs.Models
+@using Orchard.Utility.Extensions;
+
+@{
+    Layout.Title = Model.ContentItem.TitlePart.Title;
+
+    Model.Classes.Add("content-item");
+
+    var contentTypeClassName = ((string)Model.ContentItem.ContentType).HtmlClassify();
+    Model.Classes.Add(contentTypeClassName);
+
+    var tag = Tag(Model, "article");
+}
+
+@tag.StartElement
+<header>
+    @if (AuthorizedFor(Permissions.ManageBlogs)) {
+        <a href="@Url.BlogPostCreate((BlogPart) Model.ContentItem.Get(typeof (BlogPart)))" class="add place-right button success"><span class="mif-plus"></span> @T("New Post")</a>
+    }
+    @Display(Model.Header)
+    @if (Model.Meta != null) {
+        <div class="metadata">
+            @Display(Model.Meta)
+        </div>
+    }
+</header>
+@Display(Model.Content)
+@if (Model.Footer != null) {
+    <footer>
+        @Display(Model.Footer)
+    </footer>
+}
+@tag.EndElement

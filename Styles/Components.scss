@@ -1,8 +1,6 @@
 /* Tag Cloud */
 ul.tag-cloud { 
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    @include list-unstyled;
 }
 li.tag-cloud-tag { display: inline; }
 .tag-cloud-tag a { border: none; }
@@ -16,3 +14,10 @@ li.tag-cloud-tag { display: inline; }
 .tag-cloud-8 { font-size: 1.7em; }
 .tag-cloud-9 { font-size: 1.8em; }
 .tag-cloud-10 { font-size: 1.9em; }
+
+/* Archive */
+.archives{
+    ul{
+        @include list-unstyled;
+    }
+}
