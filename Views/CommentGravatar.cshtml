@@ -1,0 +1,25 @@
+﻿@using MetroUI.Gravatar
+@using MetroUI.Gravatar.Html
+@using Orchard.Comments.Models
+@using Orchard.ContentManagement
+@using Orchard.Core.Common.Models
+
+@{
+    CommentPart comment = Model.ContentPart;
+    string gravatarEmail = string.Empty;
+
+    if (String.IsNullOrWhiteSpace(comment.UserName)) {
+        gravatarEmail = comment.Email;
+    }
+    else {
+        var user = comment.As<CommonPart>().Owner;
+        
+        if (user != null) {
+            gravatarEmail = user.Email;
+        }
+    }
+
+    var gravatarUrl = Url.Gravatar(string.IsNullOrWhiteSpace(gravatarEmail) ? "dummy@foobar.com" : gravatarEmail, 100, "mm", Rating.G);
+}
+
+<img src="@gravatarUrl" alt="@T("Gravatar Image")" class="icon" />

@@ -1,0 +1,29 @@
+﻿@using Orchard.UI.Resources;
+@using System.Globalization;
+
+@{
+    var theme = WorkContext.CurrentTheme;
+    var cultureInfo = CultureInfo.GetCultureInfo(WorkContext.CurrentCulture);
+
+    RegisterLink(new LinkEntry { Type = "image/x-icon", Rel = "shortcut icon", Href = Url.Content(theme.Location + "/" + theme.Path + "/Content/" + "favicon.ico") });
+    RegisterLink(new LinkEntry { Rel = "apple-touch-icon", Href = Url.Content(theme.Location + "/" + theme.Path + "/Content/" + "apple-touch-icon.png") });
+
+    SetMeta(new MetaEntry { Name = "viewport", Content = "width=device-width, initial-scale=1.0" });
+    SetMeta(httpEquiv: "X-UA-Compatible", content: "IE=edge,chrome=1");
+
+    Style.Include("metro/metro.css", "metro/metro.min.css");
+    Style.Include("metro/metro-responsive.css", "metro/metro-responsive.min.css");
+    Style.Include("metro/metro-schemes.css", "metro/metro-schemes.min.css");
+    Style.Include("metro/metro-icons.css", "metro/metro-icons.min.css");
+    
+    if (cultureInfo.TextInfo.IsRightToLeft) {
+        Style.Include("metro/metro-rtl.css", "metro/metro-rtl.min.css");
+    }
+
+    Style.Include("site.css");
+
+    Script.Include("~/Core/Shapes/Scripts/html5.js").UseCondition("lt IE 9").AtHead();
+
+    Script.Include("metro.js", "metro.min.js");
+    Script.Include("custom.js");
+}

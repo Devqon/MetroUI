@@ -1,0 +1,19 @@
+﻿@if (WorkContext.CurrentUser != null)
+{
+    <li>
+        <a href="#" id="userDropdown" class="dropdown-toggle" data-toggle="dropdown"><span class="mif-user"></span> @Html.ItemDisplayText(WorkContext.CurrentUser)</a>
+        <ul class="d-menu" data-role="dropdown" aria-labelledby="userDropdown">
+            <li>@Html.ActionLink(T("Edit Profile").Text, "Edit", new { Controller = "Admin", Area = "Orchard.Users", id = WorkContext.CurrentUser.Id })</li>
+            <li>@Html.ActionLink(T("Change Password").ToString(), "ChangePassword", new { Controller = "Account", Area = "Orchard.Users" })</li>
+            <li class="divider"></li>
+            <li><a href="@Url.Action("LogOff", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = "~" })" rel="no-follow"><i class="fa fa-sign-out"></i> @T("Sign out")</a></li>
+        </ul>
+    </li>
+     if (AuthorizedFor(Orchard.Security.StandardPermissions.AccessAdminPanel)) {
+         <li>@Html.ActionLink(T("Dashboard").ToString(), "Index", new { Area = "Dashboard", Controller = "Admin"})</li>
+     }
+}
+else
+{
+    <li><a href="@Url.Action("LogOn", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = (Request.QueryString["ReturnUrl"] ?? Request.RawUrl) })" rel="no-follow"><i class="fa fa-sign-in"></i> @T("Sign in")</a></li>
+}

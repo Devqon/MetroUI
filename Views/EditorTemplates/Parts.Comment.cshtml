@@ -1,0 +1,36 @@
+﻿@model Orchard.Comments.Models.CommentPart
+
+<div class="who">
+    <legend id="add-comment">@T("Leave a Comment")</legend>
+    @if (WorkContext.CurrentUser == null)
+    {
+        @Html.LabelFor(m => m.Author, T("Name").ToString(), new { @class = "control-label" })
+        <div class="input-control text full-size">
+            @Html.TextBoxFor(m => m.Author, new { @class = "form-control" })
+        </div>
+        @Html.LabelFor(m => m.Email, T("Email").ToString(), new { @class = "control-label" })
+        <div class="input-control text full-size">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+        @Html.LabelFor(m => m.SiteName, T("Url").ToString(), new { @class = "control-label" })
+        <div class="input-control text full-size">
+            @Html.TextBoxFor(m => m.SiteName, new { @class = "form-control" })
+        </div>
+    }
+    else
+    {
+        @Html.Hidden("Name", WorkContext.CurrentUser.UserName ?? "")
+        @Html.Hidden("Email", WorkContext.CurrentUser.Email ?? "")
+    }
+</div>
+
+<div class="what">
+    @Html.LabelFor(m => m.CommentText, T("Comment").ToString(), new { @class = "control-label" })
+    <div class="input-control textarea full-size">
+        @Html.TextAreaFor(m => m.CommentText, new { rows = 10, cols = 30, @class = "" })
+    </div>
+    <div class="form-group">
+        @Html.HiddenFor(m => m.CommentedOn)
+        @Html.HiddenFor(m => m.RepliedOn)
+    </div>
+</div>

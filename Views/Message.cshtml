@@ -1,0 +1,12 @@
+﻿@{
+    var type = Model.Type.ToString();
+    var errorClass = type == "Error" ? "alert" : type == "Information" ? "info" : "warning";
+    var icon = type == "Error" ? "mif-cancel" : type == "Information" ? "mif-info" : "mif-warning";
+}
+
+<div class="notify @errorClass" style="max-width: 100% !important;">
+    <span class="notify-icon @icon"></span>
+    <p class="notify-text">
+        @Html.Raw(Html.Encode(Model.Message).Replace("\n", "<br />"))
+    </p>
+</div>

@@ -1,0 +1,34 @@
+﻿@using System.Globalization;
+
+@{
+    var cultureInfo = CultureInfo.GetCultureInfo(WorkContext.CurrentCulture);
+
+    string title = Convert.ToString(Model.Title);
+    string siteName = Convert.ToString(WorkContext.CurrentSite.SiteName);
+
+    Display.Resources();
+}
+
+<!DOCTYPE html>
+<html lang="@WorkContext.CurrentCulture" 
+      class="static @Html.ClassForPage() boxed-layout fixed-nav sticky-footer @(cultureInfo.TextInfo.IsRightToLeft ? "rtl" : string.Empty)"
+      data-ng-app="masterApp">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="index, follow, archive" />
+    <title>@Html.Title(title, siteName)</title>
+    
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    @Display(Model.Head)
+
+    <script type="text/javascript">
+        (function (d) { d.className = "dyn" + d.className.substring(6, d.className.length); })(document.documentElement);
+    </script>
+</head>
+
+    <body class="theme-@WorkContext.CurrentTheme.Id">
+        @Display(Model.Body)
+        @Display(Model.Tail)
+    </body>
+</html>

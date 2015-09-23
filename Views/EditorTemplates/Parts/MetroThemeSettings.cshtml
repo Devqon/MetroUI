@@ -1,0 +1,47 @@
+﻿@model MetroUI.Models.MetroThemeSettingsPart
+           
+@{
+    var availableColors = new[] {"default", "darcula", "pink", "navy", "red", "green", "orange"};
+    var availableSizes = new[] {"default", "mini", "small"};
+    var availableModes = new Dictionary<string, string> {{"breadcrumbs", "default"}, {"breadcrumbs2", "shapes"}};
+}
+           
+<fieldset>
+    <legend>Fixed Navigation Bar</legend>
+    @Html.CheckBoxFor(m => m.FixedHeader)@T("Use Fixed Navigation Bar")
+</fieldset>
+<fieldset>
+    <legend>Navigation Color</legend>
+    @Html.DropDownListFor(m => m.NavigationColor, new SelectList(availableColors))
+</fieldset>
+<fieldset>
+    <legend>Breadcrumbs</legend>
+    @Html.CheckBoxFor(m => m.DarkBreadcrumbs)@T("Use Dark Breadcrumbs")
+    <div>
+        <label>@T("Breadcrumb mode")</label>
+        @Html.DropDownListFor(m => m.BreadcrumbMode,
+            new SelectList(availableModes, "Key", "Value"), new { @class = "ddl-availableModes" })
+    </div>
+    <div id="breadcrumb-size">
+        <label>@T("Breadcrumb size")</label>
+        @Html.DropDownListFor(m => m.BreadcrumbSize, new SelectList(availableSizes))
+    </div>
+</fieldset>
+
+@using (Script.Foot()) {
+    <script>
+        $(function() {
+            $("select.ddl-availableModes").change(sizeVisibility);
+
+            function sizeVisibility() {
+                if ($("select.ddl-availableModes").val() == "breadcrumbs2") {
+                    $("#breadcrumb-size").show();
+                } else {
+                    $("#breadcrumb-size").hide();
+                }
+            }
+
+            sizeVisibility();
+        })
+    </script>
+}

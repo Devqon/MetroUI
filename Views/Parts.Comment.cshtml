@@ -1,0 +1,43 @@
+﻿@using Orchard.Comments.Models
+@using Orchard.ContentManagement
+
+@{
+    CommentPart comment = Model.ContentPart;
+    var comments = comment.CommentedOnContentItem.As<CommentsPart>();
+
+    var children = New.List(Items: Model.Items);
+    children.Classes.Add("comments");
+    children.Classes.Add("margin-left20");
+}
+
+<div class="panel margin20 no-margin-left no-margin-right comment" data-role="panel">
+    <div class="heading">
+        @Display.CommentGravatar(ContentPart: comment) />
+        <span class="title">
+            @Display.CommentAuthor(ContentPart: comment)
+            @Display.CommentMetadata(ContentPart: comment)
+            @if (comments.ThreadedComments)
+            {
+                <span class="reply">@Display.CommentReplyButton(ContentPart: comment)</span>
+            }
+        </span>
+    </div>
+    <div class="content">
+        @Display.CommentText(ContentPart: Model.ContentPart, ContentItem: Model.ContentItem)
+    </div>
+    @Display(children)
+</div>
+
+@*<blockquote class="comment comment-@comment.Id">
+        @Display.CommentGravatar(ContentPart: comment)
+        @Display.CommentText(ContentPart: Model.ContentPart, ContentItem: Model.ContentItem)
+        <footer>
+            <span class="who">@Display.CommentAuthor(ContentPart: comment)</span>
+            <span class="when">@Display.CommentMetadata(ContentPart: comment)</span>
+            @if (comments.ThreadedComments)
+            {
+                <span class="reply">@Display.CommentReplyButton(ContentPart: comment)</span>
+            }
+        </footer>
+        @Display(children)
+    </blockquote>*@

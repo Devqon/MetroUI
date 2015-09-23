@@ -1,0 +1,60 @@
+﻿@using Orchard.ContentManagement
+@{
+    var userCanRegister = WorkContext.CurrentSite.As<Orchard.Users.Models.RegistrationSettingsPart>().UsersCanRegister;
+    var enableLostPassword = WorkContext.CurrentSite.As<Orchard.Users.Models.RegistrationSettingsPart>().EnableLostPassword;
+}
+@if (Model.Title == "Access Denied")
+{
+    <div class="alert alert-dismissable alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <i class="fa fa-times-circle"></i>&nbsp;&nbsp;@T("You do not have permission to complete your request.")
+    </div>
+}
+@if (Html.ValidationSummary() != null)
+{
+    <div class="alert alert-dismissable alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <i class="fa fa-times-circle"></i>&nbsp;&nbsp;@T("Login was unsuccessful. Please correct the errors and try again.")
+        <p>@Html.ValidationSummary()</p>
+    </div>
+}
+<h1 class="page-title">@Html.TitleForPage(T("Sign In"))</h1>
+<div class="well">
+    <p>
+        @T("Please enter your username and password.")
+        @if (userCanRegister)
+        { @Html.ActionLink(T("Register").Text, "Register", new { ReturnUrl = Request.QueryString["ReturnUrl"] }) @T(" if you don't have an account.") }
+        @if (enableLostPassword)
+        { <text> </text> @Html.ActionLink(T("Lost your Password?").Text, "RequestLostPassword") }
+    </p>
+    @using (Html.BeginFormAntiForgeryPost(Url.Action("LogOn", new { ReturnUrl = Request.QueryString["ReturnUrl"] })))
+    {
+        <fieldset class="login-form group">
+            <legend>@T("Account Information")</legend>
+            <div>
+                <label for="username-email">@T("Username")</label>
+                <div class="input-control text full-size" data-role="input">
+                    @Html.TextBox("userNameOrEmail", "", new { id = "username-email", autofocus = "autofocus", @class = "validate[required]" })
+                    <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                </div>
+                @Html.ValidationMessage("userNameOrEmail")
+            </div>
+            <div>
+                <label for="password">@T("Password")</label>
+                <div class="input-control password full-size" data-role="input">
+                    @Html.Password("password", null, new { @class = "validate[required]" })
+                    <button class="button helper-button reveal"><span class="mif-looks"></span></button>
+                </div>
+                @Html.ValidationMessage("password")
+            </div>
+            <label class="input-control checkbox">
+                @Html.CheckBox("rememberMe", new { id = "remember-me" })
+                <span class="check"></span>
+                <span class="caption">@T("Remember Me")</span>
+            </label>
+            <div class="form-group">
+                <button class="button primary" type="submit">@T("Sign In")</button>
+            </div>
+        </fieldset>
+    }
+</div>

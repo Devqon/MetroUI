@@ -1,0 +1,57 @@
+<Placement>
+
+  <Match ContentType="User">
+    <Match DisplayType="Mini">
+      <Place Parts_Common_Body_Summary="Summary:1" />
+    </Match>
+    <Match DisplayType="Detail">
+      <Place Parts_Common_Body="Body:1" />
+      <Place Parts_Tags_ShowTags="Tags:0" />
+    </Match>
+    <Place Parts_Common_Body="Body:1" />
+    <Place Parts_Author_Tags="Skills:0" />
+    <Place Parts_Author_Items="AuthorItems:1" />
+  </Match>
+
+  <Match ContentType="Page">
+    <Place Parts_Common_Metadata="-"/>
+  </Match>
+
+  <Match ContentType="Media">
+    <Match DisplayType="Summary">
+      <Place Parts_Title_Summary="1"/>
+      <Place Parts_Common_Metadata_Summary="-"/>
+    </Match>
+  </Match>
+
+  <Match DisplayType="Detail">
+    <Place Fields_ContentPicker-Authors="/AsideSecond:before" />
+  </Match>
+
+  <Match ContentType="Blog">
+    <Place Parts_Common_Metadata="-" />
+  </Match>
+
+  <Match ContentType="BlogPost">
+    <Match DisplayType="Mini">
+      <Place Parts_Common_Body_Summary="Summary:0"
+             Parts_Tags_ShowTags="Tags:0"
+             Parts_Comments_Count="CommentsCount:0"
+             Parts_Common_Metadata_Summary="-" />
+    </Match>
+    <Match DisplayType="Summary">
+      <Place Parts_Common_Body_Summary="Summary:0"
+             Parts_Tags_ShowTags="Tags:0"
+             Parts_Comments_Count="CommentsCount:0"
+             Parts_Common_Metadata_Summary="-" />
+    </Match>
+    <Match DisplayType="Detail">
+      <Place Parts_Common_Body="Content:1"
+             Parts_Tags_ShowTags="Tags:0"
+             Parts_Comments_Count="CommentsCount:0"
+             Parts_ListOfComments="Footer:1"
+             Parts_CommentForm="Footer:2"
+             Parts_Common_Owner="/AsideSecond:before" />
+    </Match>
+  </Match>
+</Placement>

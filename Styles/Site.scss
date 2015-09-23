@@ -1,0 +1,19 @@
+@import "Default.scss";
+@import "Helpers.scss";
+@import "Components.scss";
+
+ul{
+    &.content-items, &.comments{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.panel{
+    .heading{
+        img.icon{
+            padding: 0;
+        }
+    }
+}
