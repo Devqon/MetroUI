@@ -1,13 +1,32 @@
-﻿@{
-    if (Model.TotalItemCount > Model.PageSize) {
-        // number of page number links to show, 0 means no link, 1 means only the current page, or more accepted.
-        Model.Quantity = 5;
+﻿@using Orchard.ContentManagement
+@{
+    var contentItem = (IContent)Model.ContentItem;
+    long totalCount = Model.TotalItemCount;
+    long currentPage = Model.Page;
+    long perPage = Model.PageSize;
+    long pagesCount = (totalCount / perPage) + ((totalCount % perPage) == 0 ? 0 : 1);
 
-        Model.Metadata.Alternates.Clear();
-        Model.Metadata.Type = "Pager_Links";
-        
-        <div id="pagination">
-            @Display(Model)
-        </div>
-    }
+    long prevPage = (currentPage == 1) ? 1 : (currentPage - 1);
+    long nextPage = (currentPage == pagesCount) ? pagesCount : (currentPage + 1);
+}
+@if (pagesCount > 1)
+{
+    <nav class="pagination">
+        @for (int i = 1; i <= pagesCount; i++)
+        {
+            if (i == currentPage)
+            {
+                <a class="item current">@i</a>
+            }
+            else
+            {
+                if (contentItem != null) {
+                    <a href="@(Url.ItemDisplayUrl(contentItem))?page=@(i)">@i</a>
+                }
+                else {
+                    <a href="#" class="item">@i</a>
+                }
+            }
+        }
+    </nav>
 }
