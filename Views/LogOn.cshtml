@@ -5,21 +5,53 @@
 }
 @if (Model.Title == "Access Denied")
 {
-    <div class="alert alert-dismissable alert-danger">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <i class="fa fa-times-circle"></i>&nbsp;&nbsp;@T("You do not have permission to complete your request.")
-    </div>
+    using (Script.Foot())
+    {
+        <script>
+            (function ($) {
+
+                $(function () {
+                    $.Notify({
+                        caption: "@T(Model.Title)",
+                        content: "@T("You do not have permission to complete your request.")",
+                        type: "alert",
+                        timeout: 6000
+                    });
+                });
+
+            })(jQuery);
+        </script>
+    }
 }
 @if (Html.ValidationSummary() != null)
 {
-    <div class="alert alert-dismissable alert-danger">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <i class="fa fa-times-circle"></i>&nbsp;&nbsp;@T("Login was unsuccessful. Please correct the errors and try again.")
-        <p>@Html.ValidationSummary()</p>
-    </div>
+    using (Script.Foot())
+    {
+        <script>
+            (function ($) {
+
+                @foreach(var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors)){
+                    <text>
+                $(function () {
+                    $.Notify({
+                        content: "@T(modelError.ErrorMessage)",
+                        type: "alert",
+                        timeout: 6000
+                    });
+                });
+                </text>
+                }
+
+            })(jQuery);
+        </script>
+    }
 }
+
 <h1 class="page-title">@Html.TitleForPage(T("Sign In"))</h1>
-<div class="well">
+
+<hr class="thin" />
+
+<div>
     <p>
         @T("Please enter your username and password.")
         @if (userCanRegister)

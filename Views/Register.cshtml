@@ -1,0 +1,86 @@
+﻿@{
+    var minLength = ViewData["PasswordLength"];
+}
+
+@if (Html.ValidationSummary() != null)
+{
+    using (Script.Foot())
+    {
+        <script>
+            (function ($) {
+
+                @foreach(var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors)){
+                    <text>
+                $(function () {
+                    $.Notify({
+                        content: "@T(modelError.ErrorMessage)",
+                        type: "alert",
+                        timeout: 6000
+                    });
+                });
+                </text>
+                }
+
+            })(jQuery);
+        </script>
+    }
+}
+
+<div>
+
+    <h1>@Html.TitleForPage(T("Create a New Account").ToString())</h1>
+
+    <hr class="thin"/>
+
+    <div>
+        <p>@T("Passwords are required to be a minimum of {0} characters in length.", minLength)</p>
+        @using (Html.BeginFormAntiForgeryPost(Url.Action("Register", new { ReturnUrl = Request.QueryString["ReturnUrl"] }), FormMethod.Post, new
+        {
+            data_role = "validator",
+            data_hide_error = "5000",
+            novalidate = "novalidate",
+            data_show_required_state = "false"
+        }))
+        {
+            <fieldset>
+                <legend>@T("Account Information")</legend>
+                <label for="username" class="control-label">@T("Username")</label>
+                <div class="input-control email full-size" data-role="input">
+                    <span class="prepend-icon mif-user"></span>
+                    <input type="text" name="username"
+                           data-validate-func="required" />
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+                <label for="email" class="control-label">@T("Email")</label>
+                <div class="input-control email full-size">
+                    <input type="email" name="email" data-role="input"
+                           data-validate-func="email" />
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+                <label for="password" class="control-label">@T("Password")</label>
+                <div class="input-control password full-size">
+                    <span class="prepend-icon mif-lock"></span>
+                    <input type="password" name="password" data-role="input"
+                           data-validate-func="minlength"
+                           data-validate-arg="@minLength" />
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+                <label for="confirmPassword" class="control-label">@T("Confirm Password")</label>
+                <div class="input-control password full-size">
+                    <input type="password" name="confirmPassword" data-role="input"
+                           data-validate-func="required" />
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+                <div>
+                    <button class="button primary" type="submit">
+                        @T("Register")
+                    </button>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>

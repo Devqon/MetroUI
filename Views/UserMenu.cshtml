@@ -15,5 +15,10 @@
 }
 else
 {
-    <li><a href="@Url.Action("LogOn", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = (Request.QueryString["ReturnUrl"] ?? Request.RawUrl) })" rel="no-follow"><i class="fa fa-sign-in"></i> @T("Sign in")</a></li>
+    <li>
+        <a href="#" class="dropdown-toggle fg-white"><span class="mif-enter"></span> @T("Sign In")</a>
+        <div class="app-bar-drop-container bg-white fg-dark place-right" data-role="dropdown" data-no-close="true">
+            @Display.LogOnPopup()
+        </div>
+    </li>
 }

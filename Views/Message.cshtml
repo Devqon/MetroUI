@@ -4,9 +4,26 @@
     var icon = type == "Error" ? "mif-cancel" : type == "Information" ? "mif-info" : "mif-warning";
 }
 
-<div class="notify @errorClass" style="max-width: 100% !important;">
+@*<div class="notify @errorClass" style="max-width: 100% !important;">
     <span class="notify-icon @icon"></span>
     <p class="notify-text">
         @Html.Raw(Html.Encode(Model.Message).Replace("\n", "<br />"))
     </p>
-</div>
+</div>*@
+
+@using (Script.Foot())
+{
+    <script>
+        (function ($) {
+
+            $(function() {
+                $.Notify({
+                    content: "@Html.Raw(Html.Encode(Model.Message).Replace("\n", "<br />"))",
+                    type: "@errorClass",
+                    timeout: 6000
+                });
+            });
+
+        })(jQuery);
+    </script>
+}

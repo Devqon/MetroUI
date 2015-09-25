@@ -1,0 +1,34 @@
+﻿@using Newtonsoft.Json
+@{
+    Style.Require("jQCloud");
+    Script.Require("jQCloud");
+    
+    var json = JsonConvert.SerializeObject(Model.TagCounts);
+    var url = Url.Action("Search", new {Controller = "Home", Area = "Orchard.Tags", TagName = "placeholder"});
+
+    var id = string.Format("tagcloud{0}", Model.ContentItem.Id);
+}
+
+<div id="@id" style="width:100%; height:200px;"></div>
+
+@using (Script.Foot()) {
+    <script>
+        $(function () {
+            var words = [];
+            var url = "@url";
+            var deserialized = @Html.Raw(json);
+
+            for (var i = 0; i < deserialized.length; i++) {
+                var item = deserialized[i];
+                var tag = {
+                    text: item.TagName,
+                    weight: item.Count,
+                    link: url.replace(this.placeholder, item.TagName)
+                };
+                words.push(tag);
+            }
+
+            $("#" + "@id").jQCloud(words);
+        });
+    </script>
+}

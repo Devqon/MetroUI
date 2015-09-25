@@ -1,0 +1,34 @@
+﻿@using Orchard.ContentManagement
+@{
+    var userCanRegister = WorkContext.CurrentSite.As<Orchard.Users.Models.RegistrationSettingsPart>().UsersCanRegister;
+    var enableLostPassword = WorkContext.CurrentSite.As<Orchard.Users.Models.RegistrationSettingsPart>().EnableLostPassword;
+}
+
+<div class="padding20">
+    @using (Html.BeginFormAntiForgeryPost(Url.Action("LogOn", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = Request.QueryString["ReturnUrl"] })))
+    {
+        <h4 class="text-light pull-left">@T("Login")</h4>
+        <div class="input-control text" data-role="input">
+            <span class="mif-user prepend-icon"></span>
+            @Html.TextBox("userNameOrEmail", "", new { id = "username-email", autofocus = "autofocus" })
+            <button class="button helper-button clear"><span class="mif-cross"></span></button>
+        </div>
+        <div class="input-control text" data-role="input">
+            <span class="mif-lock prepend-icon"></span>
+            @Html.Password("password", null)
+        </div>
+        <label class="input-control checkbox small-check">
+            @Html.CheckBox("rememberMe", new { id = "remember-me", @checked = "checked" })
+            <span class="check"></span>
+            <span class="caption">@T("Remember Me")</span>
+        </label>
+        <div class="form-actions">
+            <button type="submit" class="button primary">@T("Login")</button>
+            <button class="button link">@T("Cancel")</button>
+        </div>
+    }
+    @if (userCanRegister)
+    { @Html.ActionLink(T("Register").Text, "Register", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = Request.QueryString["ReturnUrl"] }, new { @class = "button link mini-button" }) }
+    @if (enableLostPassword)
+    { <text> </text> @Html.ActionLink(T("Lost your Password?").Text, "RequestLostPassword", new { Controller = "Account", Area = "Orchard.Users" }, new { @class = "button link mini-button" }) }
+</div>

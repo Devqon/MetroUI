@@ -25,12 +25,17 @@
         <a href="@Url.BlogPostEdit(contentItem.As<BlogPostPart>())" class="edit place-right button success"><span class="mif-pencil"></span> @T("Edit")</a>
     }
     @Display(Model.Header)
-    @if (Model.Meta != null) {
+    
+    <div class="place-left">
+        @Display(Model.Tags)
+    </div>
+    @if (Model.Meta != null)
+    {
         <div class="metadata place-right">
             @Display(Model.Meta)
         </div>
     }
-    @Display(Model.Tags)
+    <div class="clearfix"></div>
 </header>
 <hr/>
     @Display(Model.Content)

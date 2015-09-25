@@ -67,6 +67,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\jqcloud\jqcloud.js" />
+    <Content Include="Scripts\jqcloud\jqcloud.min.js" />
     <Content Include="Styles\Components.css">
       <DependentUpon>Components.scss</DependentUpon>
     </Content>
@@ -85,6 +88,8 @@
     <Content Include="Styles\Helpers.min.css">
       <DependentUpon>Helpers.css</DependentUpon>
     </Content>
+    <Content Include="Styles\jqcloud\jqcloud.css" />
+    <Content Include="Styles\jqcloud\jqcloud.min.css" />
     <Content Include="Styles\metro\metro-icons.css" />
     <Content Include="Styles\metro\metro-icons.min.css" />
     <Content Include="Styles\metro\metro-responsive.css" />
@@ -234,6 +239,7 @@
     <Compile Include="Gravatar\Html\UrlHelperExtensions.cs" />
     <Compile Include="Handlers\MetroThemeSettingsPartHandler.cs" />
     <Compile Include="Models\MetroThemeSettingsPart.cs" />
+    <Compile Include="ResourceManifest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\CommentGravatar.cshtml" />
@@ -282,6 +288,57 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Parts.Common.Body.Summary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\LogOnPopup.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.TagCloud.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Register.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orchard.Users\Account\AccessDenied.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orchard.Users\Account\ChallengeEmailFail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orchard.Users\Account\ChallengeEmailSent.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orchard.Users\Account\ChallengeEmailSuccess.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orchard.Users\Account\ChangePassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orchard.Users\Account\ChangePasswordSuccess.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orchard.Users\Account\LostPassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orchard.Users\Account\RegistrationPending.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orchard.Users\Account\RequestLostPassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Pager.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Pager.First.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Pager.Last.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Pager.CurrentPage.cshtml" />
+    <Content Include="Views\Pager.Gap.cshtml" />
+    <Content Include="Views\Pager.Next.cshtml" />
+    <Content Include="Views\Pager.Previous.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
