@@ -1,0 +1,8 @@
+﻿@{
+    var menuSize = Model.ContentItem.MenuWidgetPart.MenuSize.Value.ToLower();
+
+    Model.Menu.Classes.Add("vertical-menu");
+    Model.Menu.Classes.Add(menuSize);
+}
+
+@Display(Model.Menu)

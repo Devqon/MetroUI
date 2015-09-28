@@ -238,6 +238,8 @@
     <Compile Include="Gravatar\Html\HtmlHelperExtensions.cs" />
     <Compile Include="Gravatar\Html\UrlHelperExtensions.cs" />
     <Compile Include="Handlers\MetroThemeSettingsPartHandler.cs" />
+    <Compile Include="MenuAlternatesFactory.cs" />
+    <Compile Include="Migrations.cs" />
     <Compile Include="Models\MetroThemeSettingsPart.cs" />
     <Compile Include="ResourceManifest.cs" />
   </ItemGroup>
@@ -339,6 +341,15 @@
     <Content Include="Views\Pager.Gap.cshtml" />
     <Content Include="Views\Pager.Next.cshtml" />
     <Content Include="Views\Pager.Previous.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.MenuWidget.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.MenuWidget-MMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.MenuWidget-Vertical.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
