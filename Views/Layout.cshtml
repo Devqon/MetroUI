@@ -61,7 +61,8 @@
 }
 @if (Model.Navigation != null)
 {
-    <div class="app-bar @(settings.FixedHeader ? "fixed-top" : "") @settings.NavigationColor">
+    <div class="app-bar @(settings.FixedHeader ? "fixed-top" : "") @settings.NavigationColor" 
+         data-role="appbar">
         <div class="container">
             @Display.Branding()
             <ul class="app-bar-menu">
